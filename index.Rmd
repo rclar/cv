@@ -1,95 +1,71 @@
 ---
-title: "Nick Strayer's CV"
-author: Nick Strayer
+title: "Randy Clarke's CV"
+author: Randy Clarke
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
-    css: ['css/styles.css', 'resume']
-    # set it to true for a self-contained HTML page but it'll take longer to render
+    css: ['dd_cv.css', 'resume']
     self_contained: true
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  results='asis', 
-  echo = FALSE
-)
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-library(glue)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, results='asis')
 library(tidyverse)
-
-# Set this to true to have links turned into footnotes at the end of the document
-PDF_EXPORT <- FALSE
-
-# Holds all the links that were inserted for placement at the end
-links <- c()
+library(glue)
 
 source('parsing_functions.R')
 
-# Load csv with position info
-position_data <- read_csv('positions.csv')
-```
+position_data <- read_csv('positions.csv', show_col_types = FALSE)
 
+# Define PDF_EXPORT (you can set this to TRUE when you want to export to PDF)
+PDF_EXPORT <- FALSE
 
-```{r}
-# When in export mode the little dots are unaligned, so fix that. 
-if(PDF_EXPORT){
-  cat("
-  <style>
-  :root{
-    --decorator-outer-offset-left: -6.5px;
-  }
-  </style>")
-}
+# Initialize links vector
+links <- c()
 ```
 
 
 Aside
 ================================================================================
 
-
-![logo](beta_dist.png){width=100%}
-
 ```{r}
-# When in export mode the little dots are unaligned, so fix that. 
 if(PDF_EXPORT){
-  cat("View this CV online with links at _nickstrayer.me/cv_")
+  cat("View this CV online with links at [rclar.github.io/cv](https://rclar.github.io/cv)")
 } else {
-  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf)")
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/rclar/cv/raw/main/clarke_cv.pdf)")
 }
 ```
 
 Contact {#contact}
 --------------------------------------------------------------------------------
 
+contact_info <- "
+- <i class='fa fa-envelope'></i> rclar6294@gmail.com  
+- <i class='fa fa-phone'></i> 908-875-7393  
+- <i class='fa fa-github'></i> [github.com/rclar](https://github.com/rclar)  
+- <i class='fa fa-linkedin'></i> [linkedin.com/in/randytclarke](https://linkedin.com/in/randytclarke)  
+- <i class='fa fa-map-marker'></i> Tempe, Arizona, United States
+"
+cat(contact_info)
 
-- <i class="fa fa-envelope"></i> nick.strayer@gmail.com
-- <i class="fa fa-twitter"></i> NicholasStrayer
-- <i class="fa fa-github"></i> github.com/nstrayer
-- <i class="fa fa-link"></i> [nickstrayer.me](http://nickstrayer.me/)
-- <i class="fa fa-phone"></i> (734) 645-0110
-
-
-
-Language Skills {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
 skills <- tribble(
   ~skill,               ~level,
   "R",                  5,
-  "Javascript (d3.js)", 4.5,
-  "Python",             4,
-  "Bash",               3.5,
-  "SQL",                3,
-  "C++",                3,
-  "AWK",                3
+  "Slack",              5,
+  "Google Workspace",   4,
+  "Adobe Suite",        4,
+  "NGP VAN",            4,
+  "Salesforce",         3,
+  "AWS",                3
 )
 
 build_skill_bars(skills)
 ```
-
-
 
 
 
@@ -108,15 +84,11 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Randy Clarke {#title}
 --------------------------------------------------------------------------------
 
-
 ```{r}
-intro_text <- "I have made [visualizations viewed by hundreds of thousands of people](https://www.nytimes.com/interactive/2016/08/26/us/college-student-migration.html), [sped up query times for 25 terabytes of data by an average of 4,800 times](https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/), and built [packages for R](https://github.com/nstrayer/shinysense) that let you [do magic](http://nickstrayer.me/dataDayTexas/).
-
-Currently searching for a data science position that allows me to build tools using visualization and machine learning to help people explore and understand their data. 
-"
+intro_text <- "Community engagement professional with extensive experience in political campaigns, voter mobilization, and customer success. Skilled in recruiting, training, and managing volunteers, developing and executing outreach initiatives, and using data-driven strategies to optimize campaign effectiveness."
 
 cat(sanitize_links(intro_text))
 ```
@@ -132,20 +104,10 @@ print_section(position_data, 'education')
 
 
 
-Research Experience {data-icon=laptop}
---------------------------------------------------------------------------------
-
-```{r}
-print_section(position_data, 'research_positions')
-```
-
-
-
 Industry Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
-
 ::: aside
-I have worked in a variety of roles ranging from journalist to software engineer to data scientist. I like collaborative environments where I can learn from my peers. 
+I have worked in various roles in political campaigns, community engagement, and customer service. I thrive in collaborative environments where I can make a positive impact and continuously learn.
 :::
 
 ```{r}
@@ -156,57 +118,35 @@ print_section(position_data, 'industry_positions')
 <br>
 <br>
 
-Teaching Experience {data-icon=chalkboard-teacher}
+
+Skills & Certifications {data-icon=certificate}
 --------------------------------------------------------------------------------
 
 ::: aside
-I am passionate about education. I believe that no topic is too complex if the teacher is empathetic and willing to think about new methods of approaching task. 
+I continuously develop my skills to stay current with industry trends and best practices.
 :::
 
 ```{r}
-print_section(position_data, 'teaching_positions')
+skills <- c("Data Collection and Management", "Software as a Service (SaaS)", "Client Relationship Management", "Community Organizing", "Strategic Communication", "Volunteer Management")
+
+cat("### Skills\n")
+cat(paste("- ", skills, collapse = "\n"))
+
+cat("\n\n### Certifications\n")
+cat("- IRB – Social and Behavioral Research (Group 2)\n")
+cat("- Arena Academy 201\n")
 ```
 
 
-Selected Data Science Writing {data-icon=chart-line}
---------------------------------------------------------------------------------
-
-
-::: aside
-I regularly blog about data science and visualization on my blog [LiveFreeOrDichotomize.](https://livefreeordichotomize.com/)
-:::
-
-```{r}
-print_section(position_data, 'data_science_writings')
-```
-
-
-
-Selected Press (About)  {data-icon=newspaper}
+Technical Proficiencies {data-icon=laptop-code}
 --------------------------------------------------------------------------------
 
 ```{r}
-print_section(position_data, 'about_me_press')
+tech_skills <- c("Salesforce", "R", "Adobe Creative Cloud", "Google Workspace", "Microsoft Office", "STATA", "SPSS", "NGP Van", "Question Pro", "Scale To Win", "Impactive", "Mobilize")
+
+cat(paste("- ", tech_skills, collapse = "\n"))
 ```
 
-
-
-Selected Press (By)  {data-icon=newspaper}
---------------------------------------------------------------------------------
-
-```{r}
-print_section(position_data, 'by_me_press')
-```
-
-
-
-
-Selected Publications, Posters, and Talks {data-icon=book}
---------------------------------------------------------------------------------
-
-```{r}
-print_section(position_data, 'academic_articles')
-```
 
 
 
