@@ -41,6 +41,7 @@ if(PDF_EXPORT){
 Contact {#contact}
 --------------------------------------------------------------------------------
 
+```{r, results='asis'}
 contact_info <- "
 - <i class='fa fa-envelope'></i> rclar6294@gmail.com  
 - <i class='fa fa-phone'></i> 908-875-7393  
@@ -49,7 +50,7 @@ contact_info <- "
 - <i class='fa fa-map-marker'></i> Tempe, Arizona, United States
 "
 cat(contact_info)
-
+```
 --------------------------------------------------------------------------------
 
 ```{r}
